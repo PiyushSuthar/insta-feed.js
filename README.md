@@ -18,13 +18,15 @@
 </p>
 <p align="center">
   <a href="https://piyushsuthar.github.io/insta-feed.js/" target="_blank">View Demo</a>
+-
+<a href=https://codepen.io/piyushsuthar/pen/dyMOeXZ">Codepen</a>
 </p>
 
 ## Usage 🔥
 
 include this CDN in your html file.
 ```js
-<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@1.0/src/insta-feed.js" integrity="sha256-jDkEUjaIr1ceNzWGgIMUjYRUxV9bAf4TAVJKuAjsW3M=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@1.0/src/insta-feed.min.js" integrity="sha256-jDkEUjaIr1ceNzWGgIMUjYRUxV9bAf4TAVJKuAjsW3M=" crossorigin="anonymous"></script>
 ```
 
 And use this html tag in your HTML. Make sure to change `username=` value to your username.
@@ -34,6 +36,8 @@ And use this html tag in your HTML. Make sure to change `username=` value to you
 
 ## Demo ✨
 <a href="https://piyushsuthar.github.io/insta-feed.js/" target="_blank">View Demo</a>
+
+<a href="https://codepen.io/piyushsuthar/pen/dyMOeXZ">Try on Codepen</a>
 
 [![Insta-Feed JS Demo](https://cdn.statically.io/img/i.ibb.co/jkwGvtd/insta-feedjs.png)](https://piyushsuthar.github.io/insta-feed.js/)
 
