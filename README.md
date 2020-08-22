@@ -25,8 +25,8 @@
 ## Usage 🔥
 
 include this CDN in your html file.
-```js
-<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@1.0/src/insta-feed.min.js" integrity="sha256-jDkEUjaIr1ceNzWGgIMUjYRUxV9bAf4TAVJKuAjsW3M=" crossorigin="anonymous"></script>
+```html
+<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@1.0/src/insta-feed.min.js" ></script>
 ```
 
 And use this html tag in your HTML. Make sure to change `username=` value to your username.
@@ -34,12 +34,18 @@ And use this html tag in your HTML. Make sure to change `username=` value to you
 <insta-feed username="piyushsthr"></insta-feed>
 ```
 
+> This works only on the client side, won't work on a server.
+
 ## Demo ✨
 <a href="https://piyushsuthar.github.io/insta-feed.js/" target="_blank">View Demo</a>
 
 <a href="https://codepen.io/piyushsuthar/pen/dyMOeXZ">Try on Codepen</a>
 
 [![Insta-Feed JS Demo](https://cdn.statically.io/img/i.ibb.co/jkwGvtd/insta-feedjs.png)](https://piyushsuthar.github.io/insta-feed.js/)
+
+## Dev.to Article 🦄
+
+[![Latest Dev.to](https://latest-devto-post.vercel.app/api?username=piyush&slug=unofficial-instagram-widget-for-your-website-portfolio-k58)](https://dev.to/piyush/unofficial-instagram-widget-for-your-website-portfolio-k58)
 
 # Contributing 🤝
 Contributions, issues and feature requests are welcome!
