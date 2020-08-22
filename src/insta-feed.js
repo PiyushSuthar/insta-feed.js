@@ -1,11 +1,9 @@
-
 const css = /* Css */`
 .insta-feed {
   max-width: 300px;
   width: 100%;
   /* background-color: gray; */
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-    sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",sans-serif;
   border: 1px solid rgba(58, 58, 58, 0.3);
   border-radius: 5px;
 }
@@ -80,7 +78,9 @@ const css = /* Css */`
 .insta-feed-user-post-single img {
   width: 100%;
   height: 100%;
-  vertical-align: top;
+  vertical-align: top;    
+  max-height: 96.99px;
+  object-fit: cover;
 }
 .insta-feed-user-post-single:after {
   content: "";
@@ -110,21 +110,15 @@ template.innerHTML = /* html */ `
 ${css}
 </style>
 <div class="insta-feed">
-      <div class="insta-feed-user-info-container">
-        <div class="insta-feed-user-img">
-          <h3>Loading...</h4>
-        </div>
-        <div class="insta-feed-user-info">
-          
-        </div>
-      </div>
-      <div class="insta-feed-user-stats">
-        
-      </div>
-      <div class="insta-feed-user-posts">
-        
-      </div>
+  <div class="insta-feed-user-info-container">
+    <div class="insta-feed-user-img">
+      <h3>Loading...</h4>
     </div>
+    <div class="insta-feed-user-info"></div>
+  </div>
+  <div class="insta-feed-user-stats"></div>
+  <div class="insta-feed-user-posts"></div>
+</div>
 `
 
 class InstaFeed extends HTMLElement {
@@ -153,11 +147,10 @@ class InstaFeed extends HTMLElement {
         arr.forEach((data,index)=>{
             this._shadowRoot.querySelector(".insta-feed-user-posts").innerHTML += `
             <a href="https://instagram.com/p/${data.node.shortcode}" target="_blank" class="insta-feed-user-post-single">        
-                <div>
-                    <img src="${data.node.display_url}"/>
-                </div>
-            </a>
-                `
+              <div>
+                <img src="${data.node.display_url}"/>
+              </div>
+            </a>`
         })
     }
 
@@ -171,7 +164,7 @@ class InstaFeed extends HTMLElement {
         this._shadowRoot.querySelector('.insta-feed-user-info').innerHTML = `
             <h3>${user.full_name}</h3>
             <p>@${user.username}</p>
-            <a class="insta-feed-follow-button" target="_blank" href="https://instagram.com/${user.username}"><button>${user.followed_by_viewer === true?"Following": "Follow"}</button></a>
+            <a class="insta-feed-follow-button" target="_blank" href="https://instagram.com/${user.username}"><button>Follow</button></a>
         `
         this._shadowRoot.querySelector('.insta-feed-user-stats').innerHTML = `
         <div class="insta-feed-user-post-count">
@@ -207,5 +200,3 @@ class InstaFeed extends HTMLElement {
 }
 
 customElements.define("insta-feed", InstaFeed)
-
-
