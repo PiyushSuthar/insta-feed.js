@@ -19,7 +19,7 @@
 <p align="center">
   <a href="https://piyushsuthar.github.io/insta-feed.js/" target="_blank">View Demo</a>
 -
-<a href=https://codepen.io/piyushsuthar/pen/dyMOeXZ">Codepen</a>
+<a href="https://codepen.io/piyushsuthar/pen/dyMOeXZ">Codepen</a>
 </p>
 
 ## Usage 🔥
