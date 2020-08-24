@@ -137,7 +137,7 @@ class InstaFeed extends HTMLElement {
     }
 
     async fetchData(username){
-        const res = await fetch(`https://instagram.com/${username}?__a=1`)
+        const res = await fetch(`https://www.instagram.com/${username}/?__a=1`)
         const data = await res.json()
         // this.data = data;
         return data
