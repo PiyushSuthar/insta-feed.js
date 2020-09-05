@@ -47,6 +47,11 @@ And use this html tag in your HTML. Make sure to change `username=` value to you
 
 [![Latest Dev.to](https://latest-devto-post.vercel.app/api?username=piyush&slug=unofficial-instagram-widget-for-your-website-portfolio-k58)](https://dev.to/piyush/unofficial-instagram-widget-for-your-website-portfolio-k58)
 
+## Similar Projects 
+
+[![Medium widget](https://github-readme-stats.vercel.app/api/pin/?username=piyushsuthar&repo=medium-widget)](https://github.com/PiyushSuthar/medium-widget)
+[![Dev.to widget](https://github-readme-stats.vercel.app/api/pin/?username=saurabhdaware&repo=DEV-widget)](https://github.com/saurabhdaware/DEV-widget)
+
 # Contributing 🤝
 Contributions, issues and feature requests are welcome!
 
