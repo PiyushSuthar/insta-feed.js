@@ -137,10 +137,12 @@ class InstaFeed extends HTMLElement {
     }
 
     async fetchData(username){
-        const res = await fetch(`https://www.instagram.com/${username}/?__a=1`)
-        const data = await res.json()
-        // this.data = data;
-        return data
+//      const res = await fetch(`https://www.instagram.com/${username}/?__a=1`) // Fuck You Instagram CORS
+        let url = `https://images${~~(Math.random() * 3333)}-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=${encodeURI(`https://www.instagram.com/${username}/`)}`
+        const res = await fetch(url, { method: "GET", mode: "cors", redirect: "follow" })
+        const data = await res.text()
+        const parsedData = JSON.parse(data.match(new RegExp(/<script type="text\/javascript">window\._sharedData = (.*);<\/script>/))[1]).entry_data.ProfilePage[0];
+        return parsedData
     }
 
     renderPosts(arr = []){
@@ -195,6 +197,7 @@ class InstaFeed extends HTMLElement {
         this.renderPosts(graphql.user.edge_owner_to_timeline_media.edges)   
       } catch (err) {
         this.renderError(err)
+        this.render()
       }
     }
 }
