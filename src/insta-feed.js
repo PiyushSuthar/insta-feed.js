@@ -1,3 +1,21 @@
+/* Function to convert to google translate url. Helps to bypass cors issues.  */
+
+// https://github.com/crypto-su/corsDown
+
+function corsBypass(url) {
+  const p = url.split("/");
+  var t = '';
+  for (let i = 0; i < p.length; i++) {
+    if (i == 2) {
+      t += p[i].replaceAll('-', '--').replaceAll('.', '-') + atob('LnRyYW5zbGF0ZS5nb29n') + '/';
+    } else { if (i != p.length - 1) { t += p[i] + '/'; } else { t += p[i]; } }
+  }
+  return encodeURI(t);
+}
+
+/* --- */
+
+
 const css = /* Css */`
 .insta-feed {
   max-width: 300px;
@@ -122,53 +140,53 @@ ${css}
 `
 
 class InstaFeed extends HTMLElement {
-    constructor() {
-        super();
-        // element created
-        this._shadowRoot = this.attachShadow({mode: 'open'})
-        this._shadowRoot.appendChild(template.content.cloneNode(true))
-    }
+  constructor() {
+    super();
+    // element created
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
+  }
 
-    connectedCallback() {
-        // browser calls this method when the element is added to the document
-        // (can be called many times if an element is repeatedly added/removed)
-        this.username = this.getAttribute('username')
-        this.render()
-    }
+  connectedCallback() {
+    // browser calls this method when the element is added to the document
+    // (can be called many times if an element is repeatedly added/removed)
+    this.username = this.getAttribute('username')
+    this.render()
+  }
 
-    async fetchData(username){
-//      const res = await fetch(`https://www.instagram.com/${username}/?__a=1`) // Fuck You Instagram CORS
-        let url = `https://images${~~(Math.random() * 3333)}-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=${encodeURI(`https://www.instagram.com/${username}/`)}`
-        const res = await fetch(url, { method: "GET", mode: "cors", redirect: "follow" })
-        const data = await res.text()
-        const parsedData = JSON.parse(data.match(new RegExp(/<script type="text\/javascript">window\._sharedData = (.*);<\/script>/))[1]).entry_data.ProfilePage[0];
-        return parsedData
-    }
+  async fetchData(username) {
+    //      const res = await fetch(`https://www.instagram.com/${username}/?__a=1`) // Fuck You Instagram CORS
+    let url = `https://images${~~(Math.random() * 3333)}-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=${encodeURI(`https://www.instagram.com/${username}/`)}`
+    const res = await fetch(url, { method: "GET", mode: "cors", redirect: "follow" })
+    const data = await res.text()
+    const parsedData = JSON.parse(data.match(new RegExp(/<script type="text\/javascript">window\._sharedData = (.*);<\/script>/))[1]).entry_data.ProfilePage[0];
+    return parsedData
+  }
 
-    renderPosts(arr = []){
-        arr.forEach((data,index)=>{
-            this._shadowRoot.querySelector(".insta-feed-user-posts").innerHTML += `
+  renderPosts(arr = []) {
+    arr.forEach((data, index) => {
+      this._shadowRoot.querySelector(".insta-feed-user-posts").innerHTML += `
             <a href="https://instagram.com/p/${data.node.shortcode}" target="_blank" class="insta-feed-user-post-single">        
               <div>
-                <img src="${data.node.display_url}"/>
+                <img src="${corsBypass(data.node.display_url)}"/>
               </div>
             </a>`
-        })
-    }
+    })
+  }
 
-    renderInformation(user){
-        this._shadowRoot.querySelector('.insta-feed-user-img').innerHTML = `
+  renderInformation(user) {
+    this._shadowRoot.querySelector('.insta-feed-user-img').innerHTML = `
         <img
-            src="${user.profile_pic_url}"
+            src="${corsBypass(user.profile_pic_url)}"
             alt="${user.full_name}"
           />
         `
-        this._shadowRoot.querySelector('.insta-feed-user-info').innerHTML = `
+    this._shadowRoot.querySelector('.insta-feed-user-info').innerHTML = `
             <h3>${user.full_name}</h3>
             <p>@${user.username}</p>
             <a class="insta-feed-follow-button" target="_blank" href="https://instagram.com/${user.username}"><button>Follow</button></a>
         `
-        this._shadowRoot.querySelector('.insta-feed-user-stats').innerHTML = `
+    this._shadowRoot.querySelector('.insta-feed-user-stats').innerHTML = `
         <div class="insta-feed-user-post-count">
           <h3>${user.edge_owner_to_timeline_media.count.toLocaleString()}</h3>
           <p>Posts</p>
@@ -182,24 +200,24 @@ class InstaFeed extends HTMLElement {
           <p>Following</p>
         </div>
         `
-    }
+  }
 
-    renderError(err){
-      this._shadowRoot.querySelector('.insta-feed-user-img').innerHTML = `
+  renderError(err) {
+    this._shadowRoot.querySelector('.insta-feed-user-img').innerHTML = `
       <h3>404 Not Found</h3>
       `
-    }
+  }
 
-    async render(){
-      try {
-        const {graphql} = await this.fetchData(this.username)
-        this.renderInformation(graphql.user)
-        this.renderPosts(graphql.user.edge_owner_to_timeline_media.edges)   
-      } catch (err) {
-        this.renderError(err)
-        this.render()
-      }
+  async render() {
+    try {
+      const { graphql } = await this.fetchData(this.username)
+      this.renderInformation(graphql.user)
+      this.renderPosts(graphql.user.edge_owner_to_timeline_media.edges)
+    } catch (err) {
+      this.renderError(err)
+      this.render()
     }
+  }
 }
 
 customElements.define("insta-feed", InstaFeed)
