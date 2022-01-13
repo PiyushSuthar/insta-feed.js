@@ -26,7 +26,7 @@
 
 include this CDN in your html file.
 ```html
-<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@1.0/src/insta-feed.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/piyushsuthar/insta-feed.js@latest/src/insta-feed.min.js" ></script>
 ```
 
 And use this html tag in your HTML. Make sure to change `username=` value to your username.
